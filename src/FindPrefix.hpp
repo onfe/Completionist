@@ -1,6 +1,6 @@
 #pragma once
 #include <string>
-#include "phrase.hpp"
+#include "Phrase.hpp"
 
 struct FindPrefix {
   bool operator()(std::string prefix, phrase_t target) {

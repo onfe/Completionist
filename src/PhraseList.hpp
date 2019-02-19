@@ -4,7 +4,7 @@
 #include <algorithm>
 #include <stdint.h>
 #include <iostream>
-#include "phrase.hpp"
+#include "Phrase.hpp"
 #include "FindPrefix.hpp"
 
 typedef std::vector<phrase_t> pvc_t;
