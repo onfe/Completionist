@@ -1,4 +1,4 @@
-**Completionist is not finished, please check out the roadmap for details**
+**⚠️ Completionist is not finished, please check out the To-Do for details**
 
 ![Completionist Banner](doc/Header.svg)
 
@@ -15,4 +15,10 @@ Written in C++, the intensive tasks of sorting, searching and ranking results ar
 ### 💾 Memory Efficient
 By taking a memory-first approach to suggestions, Completionist removes infrequent suggestions when required to keep within memory limits.
 
-## Roadmap
+## To-Do
+- ~~Phrase map implementation~~ ✔️
+- Segment tree implementation ⏳ *in progress*
+- Suggestions based on imported data
+- Updating phrase data & Rebuilding segment tree
+- Self-building from `std::cin`
+- Save and load segment tree & phrase map
