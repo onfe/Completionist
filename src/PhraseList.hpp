@@ -12,6 +12,7 @@ typedef pvc_t::iterator pvci_t;
 typedef std::pair<pvci_t, pvci_t> pvcip_t;
 
 class PhraseList {
+public:
   pvc_t pl;
 
 public:
