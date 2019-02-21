@@ -1,5 +1,8 @@
 #include <iostream>
 #include <string>
+#include "SegmentTree.hpp"
+#include "PhraseList.hpp"
+#include "suggest.hpp"
 using namespace std;
 
 string complete(string inp) {
