@@ -28,7 +28,7 @@ public:
 
   void init(std::vector<uint32_t> elements) {
     if (elements.empty()) {
-      init(0)
+      init(0);
     } else {
       this->init(elements.size());
       // start the recursive build process
@@ -36,24 +36,63 @@ public:
     }
   }
 
+  uip_t getMax(uint32_t idxFirst, uint32_t idxLast) {
+    return this->qmax(0, 0, this->length - 1, idxFirst, idxLast);
+  }
+
 private:
   // Create the heap and parent nodes recursively
-  uip_t build(uint32_t heapIdx, uint32_t idx1,
-  uint32_t idx2, std::vector<uint32_t> weights) {
+  uip_t build (
+    uint32_t heapidx,
+    uint32_t idx1,
+    uint32_t idx2,
+    std::vector<uint32_t> weights
+  ) {
     uint32_t midpoint = idx1 + (idx2 - idx1) / 2;
     // if idx1 = idx 2, must be pointing at 1 element.
     if (idx1 == idx2) {
       // add the pair [weight, index] to the heap.
-      this->heap[heapIdx] = uip_t(weights[idx1], idx1);
-      return this->heap[heapIdx];
+      this->heap[heapidx] = uip_t(weights[idx1], idx1);
+      return this->heap[heapidx];
 
     } else {
       // otherwise, get the child nodes (recursive step)
-      uip_t left = this->build(heapIdx*2 + 1, idx1, midpoint, weights);
-      uip_t right = this->build(heapIdx*2 + 2, midpoint+1, idx2, weights);
+      uip_t left = this->build(heapidx*2 + 1, idx1, midpoint, weights);
+      uip_t right = this->build(heapidx*2 + 2, midpoint+1, idx2, weights);
       // and set the values of this node to the best child weight
-      this->heap[heapIdx] = (leftChild.first > rightChild.first ? left : right);
-      return this->heap[heapIdx];
+      this->heap[heapidx] = (left.first > right.first ? left : right);
+      return this->heap[heapidx];
+    }
+  }
+
+  uip_t qmax(
+    uint32_t heapidx,
+    uint32_t idx1,
+    uint32_t idx2,
+    uint32_t firstidx,
+    uint32_t lastidx
+  ) {
+    if (idx1 > idx2 || firstidx > idx2 || lastidx < idx1) {
+      // the indexes provided are incorrect, return [-1, -1].
+      return uip_t((uint32_t)0 - 1, (uint32_t)0 - 1);
+    }
+
+    if (idx1 >= firstidx && idx2 < lastidx) {
+      // if node within range, return the node.
+      return this->heap[heapidx];
+    }
+
+    // otherwise, check the children.
+    uint32_t midpoint = idx1 + (idx2 - idx1) / 2;
+    uip_t left = this->qmax(heapidx*2 + 1, idx1, midpoint, firstidx, lastidx);
+    uip_t right = this->qmax(heapidx*2 + 2, midpoint+1, idx2, firstidx, lastidx);
+
+    if (left.second == (uint32_t)0 - 1) {
+      return right;
+    } else if (right.second == (uint32_t)0 - 1) {
+      return left;
+    } else {
+      return left.first > right.first? left : right;
     }
   }
 };
