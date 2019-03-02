@@ -27,7 +27,9 @@ public:
 
   void finish(bool sorted = false) {
     if (!sorted) {
+      std::cout << "Sorting.";
       std::sort(this->pl.begin(), this->pl.end());
+      std::cout << this->pl[0].phrase;
     }
   }
 
