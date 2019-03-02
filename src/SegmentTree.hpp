@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <stdint.h>
 #include "SegmentTreeNode.hpp"
 
 typedef std::pair<uint32_t, uint32_t> uip_t;
@@ -23,16 +24,16 @@ public:
   void init(uint32_t len) {
     this->length = len;
     this->heap.clear();
-    // this->heap.resize to log2(length) + 2
+    this->heap.resize(this->calcHeap(len));
   }
 
   void init(std::vector<uint32_t> elements) {
     if (elements.empty()) {
-      init(0);
+      this->init(0);
     } else {
       this->init(elements.size());
       // start the recursive build process
-      this->build(0, 0, elements.size(), elements);
+      this->build(0, 0, elements.size() -1, elements);
     }
   }
 
@@ -52,6 +53,7 @@ private:
     // if idx1 = idx 2, must be pointing at 1 element.
     if (idx1 == idx2) {
       // add the pair [weight, index] to the heap.
+      std::cout << "add uip_t\n";
       this->heap[heapidx] = uip_t(weights[idx1], idx1);
       return this->heap[heapidx];
 
@@ -59,6 +61,7 @@ private:
       // otherwise, get the child nodes (recursive step)
       uip_t left = this->build(heapidx*2 + 1, idx1, midpoint, weights);
       uip_t right = this->build(heapidx*2 + 2, midpoint+1, idx2, weights);
+      std::cout << "add choice_t\n";
       // and set the values of this node to the best child weight
       this->heap[heapidx] = (left.first > right.first ? left : right);
       return this->heap[heapidx];
@@ -72,12 +75,13 @@ private:
     uint32_t firstidx,
     uint32_t lastidx
   ) {
+    std::cout << "h1:" << heapidx << " i1:" << idx1 << " i2:" << idx2 << " f:" << firstidx << " l:" << lastidx << std::endl;
     if (idx1 > idx2 || firstidx > idx2 || lastidx < idx1) {
       // the indexes provided are incorrect, return [-1, -1].
       return uip_t((uint32_t)0 - 1, (uint32_t)0 - 1);
     }
 
-    if (idx1 >= firstidx && idx2 < lastidx) {
+    if (idx1 >= firstidx && idx2 <= lastidx) {
       // if node within range, return the node.
       return this->heap[heapidx];
     }
@@ -94,5 +98,16 @@ private:
     } else {
       return left.first > right.first? left : right;
     }
+  }
+
+  int calcHeap(int len) {
+    int out = 0;
+    while (len > 1) {
+      len /= 2;
+      ++out;
+    }
+    out = 1 << (out + 2);
+    std::cout << "### " << out << " ###\n";
+    return out;
   }
 };
