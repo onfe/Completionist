@@ -17,8 +17,8 @@ By taking a memory-first approach to suggestions, Completionist removes infreque
 
 ## To-Do
 - ~~Phrase map implementation~~ ✔️
-- Segment tree implementation ⏳ *in progress*
-- Suggestions based on imported data
+- ~~Segment tree implementation~~ ✔️
+- Suggestions based on imported data ⏳ *in progress*
 - Updating phrase data & Rebuilding segment tree
 - Self-building from `std::cin`
 - JSON query and response
