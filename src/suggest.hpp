@@ -6,6 +6,7 @@
 #include "PhraseRange.hpp"
 #include "PhraseList.hpp"
 #include "SegmentTree.hpp"
+#include "Phrase.hpp"
 
 typedef std::vector<phrase_t> pvc_t;
 typedef pvc_t::iterator pvci_t;
@@ -46,28 +47,25 @@ pvc_t suggest (
     // The best result is added to the result
     results.push_back(pl.pl[curr.index]);
 
-    // Check for over / under flows in indexing.
-    if (curr.index -1 >= curr.index && curr.first > curr.index - 1) {
-      // std::cout << "Underflow\n";
-      continue;
-    }
-
-    if (curr.index + 1 <= curr.index && curr.index + 1 > curr.last) {
-      // std::cout << "Overflow\n";
-      continue;
-    }
-
     uint32_t lo = curr.first;
     uint32_t hi = curr.index - 1;
 
-    best = st.getMax(lo, hi);
-    queue.push(PhraseRange(lo, hi, best.first, best.second));
+    // Check for underflows in indexing.
+    if (curr.index -1 < curr.index && lo <= hi) {
+      // index is ok, so add to queue.
+      best = st.getMax(lo, hi);
+      queue.push(PhraseRange(lo, hi, best.first, best.second));
+    }
 
     lo = curr.index + 1;
     hi = curr.last;
 
-    best = st.getMax(lo, hi);
-    queue.push(PhraseRange(lo, hi, best.first, best.second));
+    // Check for overflows in indexing.
+    if (curr.index + 1 > curr.index && lo <= hi) {
+      // index is ok, so add to queue.
+      best = st.getMax(lo, hi);
+      queue.push(PhraseRange(lo, hi, best.first, best.second));
+    }
   }
 
   return results;
