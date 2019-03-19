@@ -30,7 +30,7 @@ string complete(string inp) {
 
 
 int main() {
-  ifstream infile("smallwords.txt");
+  ifstream infile("txt/smallwords.txt");
   string line;
   int pcount = 0;
 
