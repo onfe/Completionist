@@ -14,9 +14,9 @@ typedef std::pair<pvci_t, pvci_t> pvcip_t;
 typedef std::pair<uint32_t, uint32_t> uip_t;
 
 pvc_t suggest (
-  PhraseList pl,
-  SegmentTree st,
-  std::string prefix,
+  PhraseList& pl,
+  SegmentTree& st,
+  std::string& prefix,
   uint32_t numResults = 16
 ) {
   // Get the pointers [first, last] for the candidate phrases.
@@ -38,7 +38,7 @@ pvc_t suggest (
   // in this case, the largest element is the phrase range with the greatest weight.
   std::priority_queue<PhraseRange> queue;
   uip_t best = st.getMax(first, last);
-  queue.push(PhraseRange(first, last, best.first, best.second));
+  queue.emplace(first, last, best.first, best.second);
 
   while (results.size() < numResults && !queue.empty()) {
     PhraseRange curr = queue.top();
@@ -54,7 +54,7 @@ pvc_t suggest (
     if (curr.index -1 < curr.index && lo <= hi) {
       // index is ok, so add to queue.
       best = st.getMax(lo, hi);
-      queue.push(PhraseRange(lo, hi, best.first, best.second));
+      queue.emplace(lo, hi, best.first, best.second);
     }
 
     lo = curr.index + 1;
@@ -64,7 +64,7 @@ pvc_t suggest (
     if (curr.index + 1 > curr.index && lo <= hi) {
       // index is ok, so add to queue.
       best = st.getMax(lo, hi);
-      queue.push(PhraseRange(lo, hi, best.first, best.second));
+      queue.emplace(lo, hi, best.first, best.second);
     }
   }
 
