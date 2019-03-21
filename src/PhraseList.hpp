@@ -21,8 +21,7 @@ public:
   }
 
   void insert(std::uint32_t weight, std::string phrase) {
-    phrase_t prs = phrase_t(weight, phrase);
-    this->pl.push_back(prs);
+    this->pl.push_back({weight, phrase});
   }
 
   void finish(bool sorted = false) {
