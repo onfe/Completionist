@@ -4,9 +4,8 @@
 #include <vector>
 #include <stdint.h>
 #include "SegmentTreeNode.hpp"
+#include "type.hpp"
 
-typedef std::pair<uint32_t, uint32_t> uip_t;
-typedef std::vector<uip_t> uipv_t;
 
 class SegmentTree {
   /*

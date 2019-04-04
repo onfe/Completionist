@@ -7,11 +7,8 @@
 #include "PhraseList.hpp"
 #include "SegmentTree.hpp"
 #include "Phrase.hpp"
+#include "type.hpp"
 
-typedef std::vector<phrase_t> pvc_t;
-typedef pvc_t::iterator pvci_t;
-typedef std::pair<pvci_t, pvci_t> pvcip_t;
-typedef std::pair<uint32_t, uint32_t> uip_t;
 
 pvc_t suggest (
   PhraseList& pl,

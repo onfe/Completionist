@@ -6,10 +6,8 @@
 #include <iostream>
 #include "Phrase.hpp"
 #include "FindPrefix.hpp"
+#include "type.hpp"
 
-typedef std::vector<phrase_t> pvc_t;
-typedef pvc_t::iterator pvci_t;
-typedef std::pair<pvci_t, pvci_t> pvcip_t;
 
 class PhraseList {
 public:

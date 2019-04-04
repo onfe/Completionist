@@ -9,9 +9,9 @@
 #include "SegmentTree.hpp"
 #include "PhraseList.hpp"
 #include "suggest.hpp"
+#include "type.hpp"
 using namespace std;
 
-typedef std::vector<phrase_t> pvc_t;
 
 PhraseList pl;
 SegmentTree st;
