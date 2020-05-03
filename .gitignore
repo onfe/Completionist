@@ -30,3 +30,7 @@
 *.exe
 *.out
 *.app
+
+# Binaries except .gitkeep
+bin/*
+!bin/.gitkeep
