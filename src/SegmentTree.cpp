@@ -97,6 +97,5 @@ int SegmentTree::calcHeap(int len) {
     ++out;
   }
   out = 1 << (out + 2);
-  std::cout << "### " << out << " ###\n";
   return out;
 }

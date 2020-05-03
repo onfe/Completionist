@@ -4,10 +4,10 @@
 #include <stdint.h>
 
 struct Phrase {
-  std::uint32_t weight;
+  std::uint64_t weight;
   std::string phrase;
 
-  Phrase(std::uint32_t w, std::string p);
+  Phrase(std::uint64_t w, std::string p);
 
   bool operator<(Phrase const &rhs) const;
 };

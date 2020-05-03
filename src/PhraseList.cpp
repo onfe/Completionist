@@ -10,19 +10,17 @@
 #include "FindPrefix.hpp"
 #include "type.hpp"
 
-PhraseList::PhraseList(std::uint32_t slen) {
+PhraseList::PhraseList(std::uint64_t slen) {
   this->pl.reserve(slen);
 }
 
-void PhraseList::insert(std::uint32_t weight, std::string phrase) {
+void PhraseList::insert(std::uint64_t weight, std::string phrase) {
   this->pl.push_back({weight, phrase});
 }
 
 void PhraseList::finish(bool sorted) {
   if (!sorted) {
-    std::cout << "Sorting.";
     std::sort(this->pl.begin(), this->pl.end());
-    std::cout << this->pl[0].phrase;
   }
 }
 

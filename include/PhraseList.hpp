@@ -14,9 +14,9 @@ public:
   pvc_t pl;
 
 public:
-  PhraseList(std::uint32_t slen = 65535);
+  PhraseList(std::uint64_t slen = 65535);
 
-  void insert(std::uint32_t weight, std::string phrase);
+  void insert(std::uint64_t weight, std::string phrase);
 
   void finish(bool sorted = false);
 

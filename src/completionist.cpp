@@ -30,7 +30,7 @@ string complete(string inp) {
 
 
 int main() {
-  ifstream infile("txt/smallwords.txt");
+  ifstream infile("txt/words.txt");
   string line;
   int pcount = 0;
 
@@ -44,13 +44,13 @@ int main() {
       while(getline(iss, token, '\t')) {
         tokens.push_back(token);
       }
-      cout << tokens[1] << " : " << tokens[0] << "\n";
-      pl.insert(std::stoi(tokens[1]), tokens[0]);
+      // cout << tokens[1] << " : " << tokens[0] << "\n";
+      pl.insert(std::stoll(tokens[1]), tokens[0]);
       pcount++;
   }
 
   cout << "Loaded " << pcount << " phrases.\n";
-  cout << "Sorting words.";
+  cout << "Sorting words.\n";
 
   pl.finish();
 
@@ -60,8 +60,6 @@ int main() {
   for (int i = 0; i < pl.pl.size(); ++i) {
     weights.push_back(pl.pl[i].weight);
   }
-
-  cout << "teste";
 
   st.init(weights);
 
