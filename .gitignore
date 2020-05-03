@@ -34,3 +34,9 @@
 # Binaries except .gitkeep
 bin/*
 !bin/.gitkeep
+
+# Build files
+build
+
+# OSX Files
+.DS_Store

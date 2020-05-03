@@ -1,7 +1,8 @@
-#pragma once
 #include <vector>
 #include <queue>
 #include <stdint.h>
+
+#include "suggest.hpp"
 
 #include "PhraseRange.hpp"
 #include "PhraseList.hpp"
